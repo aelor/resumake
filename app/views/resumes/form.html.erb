@@ -1,0 +1,94 @@
+<H3>RESUMAKE - Make resumes in style !</H3>
+
+<%if current_user %>
+    <div class="my_resumes" style="float:left">
+      <h4>My recent resumes</h4>
+      <ul>
+          <% @resumes.order("created_at desc").each  do |s| %>
+              <li><a target="_blank" href=<%= s.name %>><%= s.name %> </a> created on <%= s.created_at.strftime("%d-%m-%y") %> at <%= s.created_at.strftime("%I:%M %P")%></li>
+          <%end%>
+      </ul>
+    </div>
+<%end%>
+
+
+<form target="_blank" enctype="multipart/form-data" class="edit" id="cvform" action="resumes/generate_pdf.pdf" method="post" name="cv">
+  <h4>Personal details</h4>
+
+  <div class="line">
+    <label>Full name</label>
+    <input type="text" value="" class="text" name="sections[basic][data][fullname]" maxlength="100">
+  </div>
+  <div class="line">
+    <label>E-mail address</label>
+    <input type="text" value="" class="text" name="sections[basic][data][email]" maxlength="100">
+  </div>
+  <div class="line">
+    <label>Phone number</label>
+    <input type="text" value="" class="text" name="sections[basic][data][phone]" maxlength="100">
+  </div>
+  <div class="line">
+    <label>Websites</label>
+    <input type="text" value="" class="text" name="sections[basic][data][website]" maxlength="100">
+  </div>
+  <hr>
+  <h4>Contact Address</h4>
+
+  <div class="line">
+    <label>Address line 1</label>
+    <input type="text" value="" class="text" name="sections[basic][data][address1]" maxlength="100">
+  </div>
+  <div class="line">
+    <label>Address line 2</label>
+    <input type="text" value="" class="text" name="sections[basic][data][address2]" maxlength="100">
+  </div>
+  <div class="line">
+    <label>Address line 3</label>
+    <input type="text" value="" class="text" name="sections[basic][data][address3]" maxlength="100">
+  </div>
+  <hr>
+
+  <h4 style="display: inline-block; width: 60%;float: left;">Work experience</h4>
+  <a href="javascript:void(0);" id="add_work">Add more</a>
+
+  <div class="work_add">
+    <label>Job title</label>
+    <input type="text" value="" class="text" name="sections[work][data][job_title][]" maxlength="100">
+    <label>Company name</label>
+    <input type="text" value="" class="text" name="sections[work][data][company][]" maxlength="100">
+    <label>Start date</label>
+    <input type="text" value="" class="text" name="sections[work][data][start][]" maxlength="100" placeholder="Eg: Jan 2005">
+    <label>End date</label>
+    <input type="text" value="" class="text" name="sections[work][data][end][]" maxlength="100" placeholder="Eg: Jan 2009, or Present">
+  </div>
+
+  <hr>
+  <h4 style="display: inline-block; width: 60%;float: left;">Education</h4>
+  <a href="javascript:void(0);" id="add_edu">Add more</a>
+
+  <div class="edu_add">
+    <label>Course name</label>
+    <input type="text" value="" class="text" name="sections[education][data][course][]" maxlength="100">
+    <label>Institution name</label>
+    <input type="text" value="" class="text" name="sections[education][data][school][]" maxlength="100">
+    <label>Start date</label>
+    <input type="text" value="" class="text" name="sections[education][data][start][]" maxlength="100" placeholder="Eg: Jan 2005">
+    <label>End date</label>
+    <input type="text" value="" class="text" name="sections[education][data][end][]" maxlength="100" placeholder="Eg: Jan 2009, or Present">
+  </div>
+
+  <hr>
+  <h4 style="display: inline-block; width: 60%;float: left;">Hobbies</h4>
+  <textarea class="textarea" name="sections[interests][data][info]" style="width: 95%; height: 10%;"></textarea>
+
+  <%if current_user %>
+      <input type="hidden" name="current_user" value=<%=current_user.id%>>
+  <%end%>
+
+  <input type="submit" class="pure-button" id="generate" value="Generate Resume">
+  <a class="pure-button" id="share" href="javascript:void(0);">Share</a>
+</form>
+
+<div id="dialog-message" title="Copy url" style="display: none;">
+    <input value="copy me" readonly/>
+</div>

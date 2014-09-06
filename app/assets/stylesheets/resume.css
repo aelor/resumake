@@ -1,0 +1,63 @@
+label{
+    display: inline-block;
+    width: 300px;
+}
+
+.line{
+    display: block;
+}
+
+form{
+    margin: 0 auto !important;
+    width: 550px;
+}
+
+h3{
+    margin: 0 auto !important;
+    width: 550px;
+}
+
+#generate{
+    margin-top: 40px;
+}
+
+.work_add{
+    margin-bottom: 30px;
+}
+
+.edu_add{
+    margin-bottom: 30px;
+}
+
+.menu {
+    background: none repeat scroll 0 0 #eee;
+    margin-bottom: 30px;
+    padding: 12px;
+}
+
+.menu-heading {
+    color: #555556;
+    text-decoration: none;
+}
+
+.login-info{
+    float: right;
+}
+
+.footer {
+    background: none repeat scroll 0 0 #f0f0f0;
+    color: #555556;
+    font-size: 10px;
+    margin-top: 40px;
+    padding: 50px;
+    text-align: center;
+}
+
+.my_resumes {
+    background: none repeat scroll 0 0 #eee;
+    width: 20%;
+}
+
+.my_resumes li{
+    list-style-type: none;
+}

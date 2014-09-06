@@ -4,7 +4,18 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
+  root 'resumes#form'
 
+  match "my-resumes", :to => "resumes#resumes_by_me", :via => [:get]
+
+  resources :resumes do
+    post 'generate_pdf', :on => :collection
+  end
+
+  match "/auth/callback", :to => "auth#callback", :via => [:get, :post]
+  match "/auth/signout", :to => "auth#signout", :via => [:get]
+  resources :auth
+  get '/:name(.pdf)', to: redirect('/pdfs/%{name}.pdf')
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

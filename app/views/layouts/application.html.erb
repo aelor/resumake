@@ -1,14 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Resumer</title>
+  <title>Resumake</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
   <%= csrf_meta_tags %>
 </head>
 <body>
+<div class="menu">
+  <a href="#" class="menu-heading">Resumake</a>
+  <span class="login-info">
+      <%if !session[:current_user].blank? %>
+          Logged in as <%= session[:current_user]%> | <a href="/auth/signout">Sign out</a>
+      <%else%>
+          Click <a href="/auth">here</a> to login
+      <%end%>
+      </span>
+</div>
 
 <%= yield %>
 
+<div class="footer">
+  Made with <3 by <a href="http://www.rituraj.me">rituraj</a>
+</div>
 </body>
 </html>
